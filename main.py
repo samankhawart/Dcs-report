@@ -14,7 +14,7 @@ logging.basicConfig(
 )
 load_dotenv()
 report_dir = os.getenv('dir_path')
-
+logging.info(f"directory already exists at: {report_dir}")
 
 class Reporting:
     def __init__(self):

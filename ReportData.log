@@ -10,3 +10,9 @@
 2025-02-10 16:22:26,182 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
 2025-02-10 16:22:30,513 - INFO - Waiting 5 minutes before next check...
 2025-02-10 16:22:39,315 - INFO - Report generation stopped by user.
+2025-02-10 16:41:01,447 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-10 16:41:01,481 - INFO - Retrieving pending reports
+2025-02-10 16:41:01,482 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:41:04,849 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-10 16:41:24,200 - INFO - Report ID 81 saved successfully at 'report_81_7_Days.pdf'
+2025-02-10 16:41:24,200 - INFO - Waiting 5 minutes before next check...

@@ -1,3 +1,12 @@
 2025-02-10 16:06:14,767 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
 2025-02-10 16:06:14,811 - INFO - Retrieving pending reports
 2025-02-10 16:06:14,814 - INFO - 'reports' directory created at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:21:58,626 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-10 16:21:58,658 - INFO - Retrieving pending reports
+2025-02-10 16:21:58,666 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:22:02,458 - INFO - Waiting 5 minutes before next check...
+2025-02-10 16:22:26,149 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-10 16:22:26,182 - INFO - Retrieving pending reports
+2025-02-10 16:22:26,182 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:22:30,513 - INFO - Waiting 5 minutes before next check...
+2025-02-10 16:22:39,315 - INFO - Report generation stopped by user.

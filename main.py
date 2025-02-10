@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import time
+import time
 
 from dotenv import load_dotenv
 
@@ -68,6 +68,6 @@ if __name__ == "__main__":
         while True:
             reporting.get_pending_reports()
             logging.info("Waiting 5 minutes before next check...")
-            time.sleep(120)  # Wait for 5 minutes
+            time.sleep(120)  # Wait for 2 minutes
     except KeyboardInterrupt:
         logging.info("Report generation stopped by user.")

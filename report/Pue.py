@@ -2,6 +2,9 @@
 import logging
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+# import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from reportlab.lib.pagesizes import letter
@@ -23,10 +26,18 @@ class CreativeEnergyReport:
         self.footer_style = ParagraphStyle(name='Footer', parent=self.styles['Normal'], fontSize=10, alignment=1, textColor=colors.HexColor('#808080'))
 
 
-    def generate_report(self, powerdata, summary_cards, site_name, duration,top_devices,filenames):
+    def generate_report(self, powerdata, summary_cards, site_name, duration,top_devices,bottom_devices,rack_details,filenames):
         self.filename=filenames
         self.data = pd.DataFrame(powerdata)
         self.data['time'] = pd.to_datetime(self.data['time'])
+        # Calculate Performance Score
+        avg_eer = self.data['energy_efficiency'].mean()
+        avg_pue = self.data['power_efficiency'].mean()
+        performance_score = (avg_eer / avg_pue) * 100
+        performance_summary = "The data center has demonstrated optimal energy efficiency with minimal wastage." if performance_score >= 75 else "The data center is operating at moderate efficiency, with room for improvements." if performance_score >= 50 else "The data center requires significant optimization efforts to improve efficiency."
+
+        # Identify Zero Data Points
+        zero_data_points = self.data[(self.data['power_efficiency'] == 0) | (self.data['energy_efficiency'] == 0)]
 
         # Generate charts and gauges
         self.create_gauge(self.data['power_efficiency'].mean(), 4, 'Power Usage Effectiveness', 'PUE')
@@ -48,18 +59,32 @@ class CreativeEnergyReport:
             self.desc_style)
         elements.append(intro)
         elements.append(Spacer(1, 20))
+        elements.append(Paragraph(performance_summary, self.desc_style))
 
         # Summary Section
-        elements.append(Paragraph("<b>Summary of Key Metrics</b>", self.header_style))
-        self.add_summary_table(elements, summary_cards)
+        elements.append(Paragraph(f"Energy Consumption Report Summary for {site_name}", self.header_style))
+        elements.append(Paragraph(f"Overall Performance Score: {performance_score:.2f}", self.desc_style))
+        # elements.append(Paragraph("<b>Summary of Key Metrics</b>", self.header_style))
+        # self.add_summary_table(elements, summary_cards)
         # Top Devices Utilization Section
-        elements.append(Paragraph("<b>Top Devices Utilization</b>", self.header_style))
+        elements.append(Paragraph("<b>Top 5 Devices Utilization</b>", self.header_style))
         elements.append(Paragraph(
             "The table below highlights the top devices based on their power consumption, bandwidth utilization, and overall efficiency metrics. These devices play a critical role in the site's energy consumption profile, and understanding their performance can help identify areas for optimization and efficiency improvements.",
             self.desc_style))
         print("good tile hhere")
         elements.append(Spacer(1, 20))
         self.add_top_devices_table(elements, top_devices)
+
+
+
+        # Top Devices Utilization Section
+        elements.append(Paragraph("<b>Bottom 5 Devices Utilization</b>", self.header_style))
+        elements.append(Paragraph(
+            "The table below highlights the bottom devices based on their power consumption, bandwidth utilization, and overall efficiency metrics. These devices play a critical role in the site's energy consumption profile, and understanding their performance can help identify areas for optimization and efficiency improvements.",
+            self.desc_style))
+        print("good tile hhere")
+        elements.append(Spacer(1, 20))
+        self.add_top_devices_table(elements, bottom_devices)
 
         elements.append(Spacer(1, 90))
 
@@ -121,6 +146,18 @@ class CreativeEnergyReport:
 
         pue_conclusion = "excellent energy efficiency." if avg_pue <= 1.5 else "moderate efficiency with room for improvement." if avg_pue <= 2.0 else "inefficient performance, necessitating immediate action."
         elements.append(Paragraph(f"<b>Conclusion:</b> The average PUE of <font color='#1678B5'>{avg_pue:.2f}</font> indicates <b><font color='#1678B5'>{pue_conclusion}</font></b>", self.desc_style))
+
+
+        # Racks Utilization
+        elements.append(Paragraph(f"<b>{site_name}'s Rack  wise Utilization</b>", self.header_style))
+        elements.append(Paragraph(
+            "The following table provides an overview of rack performance, showcasing power consumption, bandwidth utilization, and efficiency metrics. Understanding these parameters helps in identifying optimization opportunities and enhancing overall operational efficiency.",  self.desc_style))
+
+        elements.append(Spacer(1, 20))
+        self.add_rack_table(elements, rack_details)
+
+
+
 
         # Final Conclusion
         overall_conclusion = "The site has demonstrated optimal performance across the board." if avg_eer >= 0.5 else "There are noticeable inefficiencies that should be addressed to improve overall performance."
@@ -224,6 +261,39 @@ class CreativeEnergyReport:
             table.setStyle(TableStyle([
                 ('BACKGROUND', (0, i), (-1, i), bg_color)
             ]))
+
+        elements.append(table)
+        elements.append(Spacer(1, 20))
+
+    def add_rack_table(self, elements, racks):
+        headers = ["Rack Name", "Building", "Site Name", "Number of Devices", "EER", "PUE",
+                   "Power Input (kW)", "Data Traffic (GB)","PCR"]
+        data = [headers] + [[
+            rack["Rack Name"],
+            rack["Building"],
+            rack["Site Name"],
+            rack["Number of Devices"],
+            rack["EER"],
+            rack["PUE"],
+            rack["Power Input (kW)"],
+            rack["Data Traffic (GB)"],
+            rack["PCR"]
+
+        ] for rack in racks]
+        # col_widths = []  # Adjusted column widths
+        table = Table(data, colWidths=[80, 60, 70, 50, 50, 50, 70, 70, 50])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#448c35')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey)
+        ]))
+
+        for i in range(1, len(data)):
+            bg_color = colors.HexColor('#9cc993') if i % 2 == 0 else colors.white
+            table.setStyle(TableStyle([('BACKGROUND', (0, i), (-1, i), bg_color)]))
 
         elements.append(table)
         elements.append(Spacer(1, 20))

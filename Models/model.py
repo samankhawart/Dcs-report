@@ -178,3 +178,7 @@ class Vendor(Base):
     id = Column(Integer, primary_key=True)
     vendor_name = Column(String(200), nullable=True)
     devices = relationship("Device", back_populates="vendor")
+
+
+
+

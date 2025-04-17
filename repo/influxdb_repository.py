@@ -223,7 +223,6 @@ class InfluxdbRepository:
                 bandwidth = result.loc[result['_field'] == 'bandwidth', '_value'].mean() / 1000  # Convert Kbps to Mbps
                 traffic_speed = result.loc[result[
                                                '_field'] == 'total_bytesRateLast', '_value'].mean() * 8 / 1e6  # Convert bytes/sec to Mbps
-
                 # bandwidth_utilization = min((traffic_speed / bandwidth) * 100, 100) if bandwidth else 0
                 bandwidth_utilization = (traffic_speed / bandwidth) * 100 if bandwidth else 0
             else:
@@ -331,7 +330,134 @@ class InfluxdbRepository:
                 'co2emmissions': converted_data['co2emissions'],
                 'ip_address': ip
             })
+        # Sort devices by 'total_power' in descending order
+        sorted_devices = sorted(top_devices, key=lambda x: x['total_power'], reverse=True)
 
-        # Sort and get the top 5 devices
-        top_devices = sorted(top_devices, key=lambda x: x['total_power'], reverse=True)[:5]
-        return top_devices
+        # Get the top 5 devices
+        top_5_devices = sorted_devices[:5]
+
+        # Get the bottom 5 devices (avoid duplicates if less than 10 devices exist)
+        bottom_5_devices = sorted_devices[-5:] if len(sorted_devices) > 5 else sorted_devices[5:]
+
+        # Print results
+
+        return top_5_devices,bottom_5_devices
+
+    def get_24hrack_power(self,apic_ips, rack_id,start_date: datetime, end_date: datetime, duration_str: str)-> List[dict]:
+        apic_ip_list = [ip[0] for ip in apic_ips if ip[0]]
+        print(apic_ip_list)
+        if not apic_ip_list:
+            return []
+        start_time = start_date.isoformat() + 'Z'
+        end_time = end_date.isoformat() + 'Z'
+
+        # Define the aggregate window and time format based on the duration string
+        if duration_str in ["24 hours"]:
+            aggregate_window = "1h"
+            time_format = '%Y-%m-%d %H:00'
+        elif duration_str in ["7 Days", "Current Month", "Last Month"]:
+            aggregate_window = "1d"
+            time_format = '%Y-%m-%d'
+        else:  # For "last 6 months", "last year", "current year",
+            aggregate_window = "1m"
+            time_format = '%Y-%m'
+
+
+        rack_data = []
+        total_drawn, total_supplied = 0, 0
+
+        for apic_ip in apic_ip_list:
+            print(apic_ip)
+            query = f'''from(bucket: "Dcs_db")
+                  |> range(start: {start_time}, stop: {end_time})
+                  |> filter(fn: (r) => r["_measurement"] == "DevicePSU")
+                  |> filter(fn: (r) => r["ApicController_IP"] == "{apic_ip}")
+                  |> sum()
+                  |> yield(name: "total_sum")'''
+            try:
+                result = self.query_api.query(query)
+
+                drawnAvg, suppliedAvg = None, None
+
+                for table in result:
+                    for record in table.records:
+                        if record.get_field() == "total_POut":
+                            drawnAvg = record.get_value()
+                        elif record.get_field() == "total_PIn":
+                            suppliedAvg = record.get_value()
+
+                        if drawnAvg is not None and suppliedAvg is not None:
+                            total_drawn += drawnAvg
+                            total_supplied += suppliedAvg
+
+                power_utilization = None
+                pue = None
+                if total_supplied > 0:
+                    power_utilization = (total_drawn / total_supplied)
+                if total_drawn > 0:
+                    pue = ((total_supplied / total_drawn) - 1)
+
+                rack_data.append({
+                    "rack_id": rack_id,
+                    "power_utilization": round(power_utilization, 2) if power_utilization is not None else 0,
+                    "power_input": total_supplied,
+                    "power_output": total_drawn,
+                    "pue": round(pue, 2) if pue is not None else 0,
+
+                })
+
+            except Exception as e:
+                print(f"Error querying InfluxDB for {apic_ip}: {e}")
+
+        return rack_data
+
+    def get_24h_rack_datatraffic(self,apic_ips, rack_id,start_date,end_date, duration) -> List[dict]:
+        apic_ip_list = [ip[0] for ip in apic_ips if ip[0]]
+        print(apic_ip_list)
+        if not apic_ip_list:
+            return []
+        start_time = start_date.isoformat() + 'Z'
+        end_time = end_date.isoformat() + 'Z'
+
+        # Define the aggregate window and time format based on the duration string
+        if duration in ["24 hours"]:
+            aggregate_window = "1h"
+            time_format = '%Y-%m-%d %H:00'
+        elif duration in ["7 Days", "Current Month", "Last Month"]:
+            aggregate_window = "1d"
+            time_format = '%Y-%m-%d'
+        else:  # For "last 6 months", "last year", "current year",
+            aggregate_window = "1m"
+            time_format = '%Y-%m'
+        start_range = "-24h"
+        Traffic_rack_data = []
+        total_byterate = 0
+
+        for apic_ip in apic_ip_list:
+            print(apic_ip)
+            query = f'''from(bucket: "Dcs_db")
+                  |> range(start: {start_time}, stop: {end_time})
+                  |> filter(fn: (r) => r["_measurement"] == "DeviceEngreeTraffic")
+                  |> filter(fn: (r) => r["ApicController_IP"] == "{apic_ip}")
+                  |> sum()
+                  |> yield(name: "total_sum")'''
+            try:
+                result = self.query_api.query(query)
+                byterate = None
+
+                for table in result:
+                    for record in table.records:
+                        if record.get_field() == "total_bytesRateLast":
+                            byterate = record.get_value()
+                        else:
+                            byterate = 0
+                        total_byterate += byterate
+                print(total_byterate, "total_bytesRateLast")
+
+                Traffic_rack_data.append({
+                    "rack_id": rack_id,
+                    "traffic_through": total_byterate})
+            except Exception as e:
+                print(f"Error querying InfluxDB for {apic_ip}: {e}")
+
+        return Traffic_rack_data

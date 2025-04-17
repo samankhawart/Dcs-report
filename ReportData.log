@@ -16,3 +16,527 @@
 2025-02-10 16:41:04,849 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
 2025-02-10 16:41:24,200 - INFO - Report ID 81 saved successfully at 'report_81_7_Days.pdf'
 2025-02-10 16:41:24,200 - INFO - Waiting 5 minutes before next check...
+2025-02-10 16:43:24,210 - INFO - Retrieving pending reports
+2025-02-10 16:43:24,210 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:43:24,724 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-10 16:43:35,888 - INFO - Report ID 81 saved successfully at 'report_81_7_Days.pdf'
+2025-02-10 16:43:35,888 - INFO - Waiting 5 minutes before next check...
+2025-02-10 16:45:35,891 - INFO - Retrieving pending reports
+2025-02-10 16:45:35,892 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:45:36,922 - INFO - Waiting 5 minutes before next check...
+2025-02-10 16:47:36,929 - INFO - Retrieving pending reports
+2025-02-10 16:47:36,929 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-10 16:47:37,607 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:35:20,465 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 13:35:20,510 - INFO - Retrieving pending reports
+2025-02-17 13:35:20,512 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:35:23,005 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:35:23,006 - ERROR - An error occurred while fetching pending reports: 'PowerData' object has no attribute 'session_factory'
+2025-02-17 13:35:23,415 - INFO - Waiting 5 minutes before next check...
+2025-02-17 13:37:23,425 - INFO - Retrieving pending reports
+2025-02-17 13:37:23,425 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:37:23,748 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:37:23,749 - ERROR - An error occurred while fetching pending reports: 'PowerData' object has no attribute 'session_factory'
+2025-02-17 13:37:24,065 - INFO - Waiting 5 minutes before next check...
+2025-02-17 13:37:52,848 - INFO - Report generation stopped by user.
+2025-02-17 13:39:50,902 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 13:39:50,972 - INFO - Retrieving pending reports
+2025-02-17 13:39:50,972 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:39:53,758 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:39:53,759 - ERROR - An error occurred while fetching pending reports: 'PowerData' object has no attribute 'session_factory'
+2025-02-17 13:39:54,166 - INFO - Waiting 1 minutes before next check...
+2025-02-17 13:40:46,824 - INFO - Report generation stopped by user.
+2025-02-17 13:40:50,874 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 13:40:50,912 - INFO - Retrieving pending reports
+2025-02-17 13:40:50,913 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:40:53,867 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:40:58,270 - ERROR - An error occurred while fetching pending reports: InfluxdbRepository.get_24h_rack_datatraffic() takes 3 positional arguments but 6 were given
+2025-02-17 13:40:58,680 - INFO - Waiting 1 minutes before next check...
+2025-02-17 13:41:58,690 - INFO - Retrieving pending reports
+2025-02-17 13:41:58,690 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:41:59,061 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 13:42:00,643 - ERROR - An error occurred while fetching pending reports: InfluxdbRepository.get_24h_rack_datatraffic() takes 3 positional arguments but 6 were given
+2025-02-17 13:42:01,042 - INFO - Waiting 1 minutes before next check...
+2025-02-17 13:42:36,552 - INFO - Report generation stopped by user.
+2025-02-17 13:42:40,543 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 13:42:40,585 - INFO - Retrieving pending reports
+2025-02-17 13:42:40,586 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 13:42:43,438 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:25:08,262 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:25:08,303 - INFO - Retrieving pending reports
+2025-02-17 16:25:08,304 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:25:10,569 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:32:28,626 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:32:28,647 - INFO - Retrieving pending reports
+2025-02-17 16:32:28,647 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:32:30,928 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:32:40,610 - ERROR - An error occurred while fetching pending reports: 'Rack' object has no attribute 'name'
+2025-02-17 16:32:40,935 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:33:40,946 - INFO - Retrieving pending reports
+2025-02-17 16:33:40,947 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:33:41,277 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:33:49,135 - INFO - Report generation stopped by user.
+2025-02-17 16:33:55,404 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:33:55,422 - INFO - Retrieving pending reports
+2025-02-17 16:33:55,422 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:33:57,731 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:34:51,053 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:34:51,071 - INFO - Retrieving pending reports
+2025-02-17 16:34:51,071 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:34:53,429 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:36:43,861 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:36:43,882 - INFO - Retrieving pending reports
+2025-02-17 16:36:43,883 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:36:46,187 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:38:13,870 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:38:13,890 - INFO - Retrieving pending reports
+2025-02-17 16:38:13,890 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:38:16,129 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:38:19,222 - ERROR - An error occurred while fetching pending reports: 'Rack' object has no attribute 'power_output'
+2025-02-17 16:38:19,539 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:39:19,551 - INFO - Retrieving pending reports
+2025-02-17 16:39:19,551 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:39:19,873 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:39:21,018 - ERROR - An error occurred while fetching pending reports: 'Rack' object has no attribute 'power_output'
+2025-02-17 16:39:21,335 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:39:22,309 - INFO - Report generation stopped by user.
+2025-02-17 16:39:42,112 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:39:42,134 - INFO - Retrieving pending reports
+2025-02-17 16:39:42,134 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:39:44,435 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:40:32,973 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:40:32,996 - INFO - Retrieving pending reports
+2025-02-17 16:40:32,996 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:40:35,236 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:41:02,490 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:41:02,510 - INFO - Retrieving pending reports
+2025-02-17 16:41:02,510 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:41:04,777 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:41:21,952 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:41:21,973 - INFO - Retrieving pending reports
+2025-02-17 16:41:21,973 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:41:24,178 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:41:27,270 - ERROR - An error occurred while fetching pending reports: 'Rack' object has no attribute 'power_output'
+2025-02-17 16:41:27,582 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:42:27,584 - INFO - Retrieving pending reports
+2025-02-17 16:42:27,585 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:42:27,901 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:42:29,046 - ERROR - An error occurred while fetching pending reports: 'Rack' object has no attribute 'power_output'
+2025-02-17 16:42:29,357 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:42:31,270 - INFO - Report generation stopped by user.
+2025-02-17 16:42:54,483 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:42:54,501 - INFO - Retrieving pending reports
+2025-02-17 16:42:54,501 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:42:56,741 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:42:59,749 - ERROR - An error occurred while fetching pending reports: division by zero
+2025-02-17 16:43:00,073 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:43:45,875 - INFO - Report generation stopped by user.
+2025-02-17 16:43:48,207 - INFO - directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND
+2025-02-17 16:43:48,227 - INFO - Retrieving pending reports
+2025-02-17 16:43:48,227 - INFO - 'reports' directory already exists at: /home/aziz/DCS-Project-Dev/DCS/FAST_BACKEND\reports
+2025-02-17 16:43:50,521 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:57:46,838 - WARNING - Python-dotenv could not parse statement starting at line 12
+2025-02-17 16:57:46,838 - INFO - directory already exists at: /reporting
+2025-02-17 16:57:46,855 - INFO - Retrieving pending reports
+2025-02-17 16:57:46,855 - INFO - 'reports' directory created at: /reporting\reports
+2025-02-17 16:57:49,096 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:58:00,549 - INFO - Report generation stopped by user.
+2025-02-17 16:58:18,588 - INFO - directory already exists at: /reporting
+2025-02-17 16:58:18,608 - INFO - Retrieving pending reports
+2025-02-17 16:58:18,609 - INFO - 'reports' directory already exists at: /reporting\reports
+2025-02-17 16:58:20,908 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 16:58:34,500 - ERROR - An error occurred while fetching pending reports: 'PCR'
+2025-02-17 16:58:34,824 - INFO - Waiting 1 minutes before next check...
+2025-02-17 16:59:17,621 - INFO - Report generation stopped by user.
+2025-02-17 17:00:00,657 - INFO - directory already exists at: reporting
+2025-02-17 17:00:00,677 - INFO - Retrieving pending reports
+2025-02-17 17:00:00,677 - INFO - 'reports' directory created at: reporting\reports
+2025-02-17 17:00:02,944 - INFO - Processing report ID 81 with site_id 1 and duration 7 Days
+2025-02-17 17:00:15,527 - INFO - Report ID 81 saved successfully at 'report_81_7_Days.pdf'
+2025-02-17 17:00:15,528 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:01:15,535 - INFO - Retrieving pending reports
+2025-02-17 17:01:15,535 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:01:16,017 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:02:16,023 - INFO - Retrieving pending reports
+2025-02-17 17:02:16,023 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:02:16,507 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:03:16,517 - INFO - Retrieving pending reports
+2025-02-17 17:03:16,517 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:03:16,999 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:04:17,015 - INFO - Retrieving pending reports
+2025-02-17 17:04:17,015 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:04:17,503 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:05:17,513 - INFO - Retrieving pending reports
+2025-02-17 17:05:17,513 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:05:18,002 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:06:18,015 - INFO - Retrieving pending reports
+2025-02-17 17:06:18,015 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:06:18,342 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:06:39,574 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_81_7_Days.pdf'
+2025-02-17 17:06:39,895 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:06:47,573 - INFO - Report generation stopped by user.
+2025-02-17 17:06:50,425 - INFO - directory already exists at: reporting
+2025-02-17 17:06:50,442 - INFO - Retrieving pending reports
+2025-02-17 17:06:50,442 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:06:52,732 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:07:14,683 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_81_7_Days.pdf'
+2025-02-17 17:07:15,007 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:07:34,378 - INFO - Report generation stopped by user.
+2025-02-17 17:07:44,192 - INFO - directory already exists at: reporting
+2025-02-17 17:07:44,211 - INFO - Retrieving pending reports
+2025-02-17 17:07:44,211 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:07:46,504 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:08:10,125 - INFO - Report ID 81 saved successfully at 'report_81_7_Days.pdf'
+2025-02-17 17:08:10,125 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:09:10,137 - INFO - Retrieving pending reports
+2025-02-17 17:09:10,137 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:09:10,623 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:10:10,626 - INFO - Retrieving pending reports
+2025-02-17 17:10:10,626 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:10:11,127 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:11:11,132 - INFO - Retrieving pending reports
+2025-02-17 17:11:11,132 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:11:11,619 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:12:11,630 - INFO - Retrieving pending reports
+2025-02-17 17:12:11,630 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:12:12,119 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:13:12,131 - INFO - Retrieving pending reports
+2025-02-17 17:13:12,131 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:13:12,616 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:14:12,627 - INFO - Retrieving pending reports
+2025-02-17 17:14:12,627 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:14:13,114 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:15:13,115 - INFO - Retrieving pending reports
+2025-02-17 17:15:13,115 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:15:13,600 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:16:50,085 - INFO - Retrieving pending reports
+2025-02-17 17:16:50,085 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:17:09,324 - ERROR - An error occurred while fetching pending reports: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)')
+[SQL: SELECT `Reports`.id AS `Reports_id`, `Reports`.report_title AS `Reports_report_title`, `Reports`.site_id AS `Reports_site_id`, `Reports`.report_type AS `Reports_report_type`, `Reports`.duration AS `Reports_duration`, `Reports`.path AS `Reports_path`, `Reports`.entered_on AS `Reports_entered_on`, `Reports`.`Status` AS `Reports_Status`, `Reports`.message AS `Reports_message`, `Reports`.created_at AS `Reports_created_at`, `Reports`.updated_at AS `Reports_updated_at` 
+FROM `Reports` 
+WHERE `Reports`.`Status` = false]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-02-17 17:18:37,246 - INFO - directory already exists at: reporting
+2025-02-17 17:18:37,276 - INFO - Retrieving pending reports
+2025-02-17 17:18:37,276 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:18:39,531 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:19:01,697 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_81_7_Days.pdf'
+2025-02-17 17:19:02,016 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:19:15,320 - INFO - Report generation stopped by user.
+2025-02-17 17:19:18,102 - INFO - directory already exists at: reporting
+2025-02-17 17:19:18,123 - INFO - Retrieving pending reports
+2025-02-17 17:19:18,123 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:19:20,480 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:19:44,960 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_81_7_Days.pdf'
+2025-02-17 17:19:45,293 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:20:45,302 - INFO - Retrieving pending reports
+2025-02-17 17:20:45,302 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:20:45,637 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:23:52,881 - INFO - directory already exists at: reporting
+2025-02-17 17:23:52,904 - INFO - Retrieving pending reports
+2025-02-17 17:23:52,904 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:23:55,107 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-17 17:24:18,113 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_81_7_Days.pdf'
+2025-02-17 17:24:18,429 - INFO - Waiting 1 minutes before next check...
+2025-02-17 17:25:18,439 - INFO - Retrieving pending reports
+2025-02-17 17:25:18,439 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-17 17:25:18,753 - INFO - Processing report ID 81 with site_id 18 and duration 7 Days
+2025-02-20 16:03:19,077 - INFO - directory already exists at: reporting
+2025-02-20 16:03:19,111 - INFO - Retrieving pending reports
+2025-02-20 16:03:19,111 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:03:21,338 - INFO - Processing report ID 82 with site_id 1 and duration 24 hours
+2025-02-20 16:03:33,675 - INFO - Report ID 82 saved successfully at 'report_82_24_hours.pdf'
+2025-02-20 16:03:33,675 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:04:33,677 - INFO - Retrieving pending reports
+2025-02-20 16:04:33,677 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:04:34,149 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:05:34,160 - INFO - Retrieving pending reports
+2025-02-20 16:05:34,160 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:05:34,648 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:05:56,648 - INFO - Report generation stopped by user.
+2025-02-20 16:20:55,069 - INFO - directory already exists at: reporting
+2025-02-20 16:20:55,098 - INFO - Retrieving pending reports
+2025-02-20 16:20:55,098 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:20:57,418 - INFO - Processing report ID 82 with site_id 1 and duration 24 hours
+2025-02-20 16:21:09,622 - ERROR - An error occurred while fetching pending reports: [Errno 13] Permission denied: 'reporting\\reports\\report_82_24_hours.pdf'
+2025-02-20 16:21:09,946 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:21:35,266 - INFO - Report generation stopped by user.
+2025-02-20 16:21:38,278 - INFO - directory already exists at: reporting
+2025-02-20 16:21:38,299 - INFO - Retrieving pending reports
+2025-02-20 16:21:38,299 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:21:40,640 - INFO - Processing report ID 82 with site_id 1 and duration 24 hours
+2025-02-20 16:21:53,167 - INFO - Report ID 82 saved successfully at 'report_82_24_hours.pdf'
+2025-02-20 16:21:53,167 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:22:53,175 - INFO - Retrieving pending reports
+2025-02-20 16:22:53,175 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:22:53,679 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:23:53,688 - INFO - Retrieving pending reports
+2025-02-20 16:23:53,688 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:23:54,185 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:24:54,188 - INFO - Retrieving pending reports
+2025-02-20 16:24:54,188 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:24:54,690 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:25:54,693 - INFO - Retrieving pending reports
+2025-02-20 16:25:54,693 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:25:55,200 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:26:55,202 - INFO - Retrieving pending reports
+2025-02-20 16:26:55,202 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:26:55,697 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:27:55,707 - INFO - Retrieving pending reports
+2025-02-20 16:27:55,707 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:27:56,216 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:28:56,223 - INFO - Retrieving pending reports
+2025-02-20 16:28:56,223 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:28:56,718 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:29:56,730 - INFO - Retrieving pending reports
+2025-02-20 16:29:56,730 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:29:57,228 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:30:57,243 - INFO - Retrieving pending reports
+2025-02-20 16:30:57,243 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:30:57,743 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:31:57,752 - INFO - Retrieving pending reports
+2025-02-20 16:31:57,752 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:31:58,256 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:32:58,271 - INFO - Retrieving pending reports
+2025-02-20 16:32:58,271 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:32:58,778 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:33:58,783 - INFO - Retrieving pending reports
+2025-02-20 16:33:58,783 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:33:59,453 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:34:59,469 - INFO - Retrieving pending reports
+2025-02-20 16:34:59,469 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:34:59,966 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:35:59,970 - INFO - Retrieving pending reports
+2025-02-20 16:35:59,970 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:36:00,480 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:37:00,482 - INFO - Retrieving pending reports
+2025-02-20 16:37:00,482 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:37:00,980 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:38:00,993 - INFO - Retrieving pending reports
+2025-02-20 16:38:00,993 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:38:01,487 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:39:01,491 - INFO - Retrieving pending reports
+2025-02-20 16:39:01,491 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:39:01,998 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:40:02,005 - INFO - Retrieving pending reports
+2025-02-20 16:40:02,005 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:40:02,505 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:41:02,505 - INFO - Retrieving pending reports
+2025-02-20 16:41:02,505 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:41:03,002 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:42:03,008 - INFO - Retrieving pending reports
+2025-02-20 16:42:03,008 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:42:03,507 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:43:03,513 - INFO - Retrieving pending reports
+2025-02-20 16:43:03,513 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:43:04,017 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:44:04,026 - INFO - Retrieving pending reports
+2025-02-20 16:44:04,026 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:44:04,522 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:45:04,528 - INFO - Retrieving pending reports
+2025-02-20 16:45:04,528 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:45:05,029 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:46:05,044 - INFO - Retrieving pending reports
+2025-02-20 16:46:05,044 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:46:05,546 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:47:05,556 - INFO - Retrieving pending reports
+2025-02-20 16:47:05,556 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:47:06,054 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:48:06,055 - INFO - Retrieving pending reports
+2025-02-20 16:48:06,055 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:48:06,587 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:49:06,597 - INFO - Retrieving pending reports
+2025-02-20 16:49:06,597 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:49:07,105 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:50:07,111 - INFO - Retrieving pending reports
+2025-02-20 16:50:07,111 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:50:07,624 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:51:07,636 - INFO - Retrieving pending reports
+2025-02-20 16:51:07,636 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:51:08,139 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:52:08,145 - INFO - Retrieving pending reports
+2025-02-20 16:52:08,145 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:52:08,657 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:53:08,660 - INFO - Retrieving pending reports
+2025-02-20 16:53:08,660 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:53:09,162 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:54:09,169 - INFO - Retrieving pending reports
+2025-02-20 16:54:09,169 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:54:09,670 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:55:09,674 - INFO - Retrieving pending reports
+2025-02-20 16:55:09,674 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:55:10,222 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:56:10,225 - INFO - Retrieving pending reports
+2025-02-20 16:56:10,225 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:56:10,738 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:57:10,741 - INFO - Retrieving pending reports
+2025-02-20 16:57:10,742 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:57:11,246 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:58:11,257 - INFO - Retrieving pending reports
+2025-02-20 16:58:11,257 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:58:11,762 - INFO - Waiting 1 minutes before next check...
+2025-02-20 16:59:11,777 - INFO - Retrieving pending reports
+2025-02-20 16:59:11,777 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 16:59:12,280 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:00:12,286 - INFO - Retrieving pending reports
+2025-02-20 17:00:12,286 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:00:12,789 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:01:12,790 - INFO - Retrieving pending reports
+2025-02-20 17:01:12,790 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:01:13,299 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:02:13,305 - INFO - Retrieving pending reports
+2025-02-20 17:02:13,305 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:02:13,821 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:03:13,833 - INFO - Retrieving pending reports
+2025-02-20 17:03:13,834 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:03:14,340 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:04:14,344 - INFO - Retrieving pending reports
+2025-02-20 17:04:14,344 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:04:14,847 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:05:14,858 - INFO - Retrieving pending reports
+2025-02-20 17:05:14,858 - INFO - 'reports' directory already exists at: reporting\reports
+2025-02-20 17:05:15,365 - INFO - Waiting 1 minutes before next check...
+2025-02-20 17:05:57,000 - INFO - Report generation stopped by user.
+2025-03-21 02:08:23,807 - INFO - directory already exists at: reporting
+2025-03-21 02:08:23,841 - INFO - Retrieving pending reports
+2025-03-21 02:08:23,841 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:08:26,128 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:08:37,543 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:08:37,865 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:09:37,877 - INFO - Retrieving pending reports
+2025-03-21 02:09:37,877 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:09:38,203 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:09:46,150 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:09:46,471 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:10:46,472 - INFO - Retrieving pending reports
+2025-03-21 02:10:46,472 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:10:46,775 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:10:54,376 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:10:54,675 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:11:54,679 - INFO - Retrieving pending reports
+2025-03-21 02:11:54,679 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:11:54,981 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:12:02,330 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:12:02,630 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:13:02,640 - INFO - Retrieving pending reports
+2025-03-21 02:13:02,640 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:13:02,942 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:13:10,525 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:13:10,824 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:14:10,838 - INFO - Retrieving pending reports
+2025-03-21 02:14:10,838 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:14:11,141 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:14:18,435 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:14:18,734 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:15:18,744 - INFO - Retrieving pending reports
+2025-03-21 02:15:18,744 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:15:19,047 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:15:26,547 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:15:26,872 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:16:26,881 - INFO - Retrieving pending reports
+2025-03-21 02:16:26,881 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:16:27,208 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:16:35,133 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:16:35,455 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:17:35,457 - INFO - Retrieving pending reports
+2025-03-21 02:17:35,457 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:17:35,784 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:17:43,940 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:17:44,268 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:18:44,281 - INFO - Retrieving pending reports
+2025-03-21 02:18:44,281 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:18:44,608 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:18:52,509 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:18:52,831 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:19:52,845 - INFO - Retrieving pending reports
+2025-03-21 02:19:52,845 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:19:53,172 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:20:01,353 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:20:01,676 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:21:01,690 - INFO - Retrieving pending reports
+2025-03-21 02:21:01,690 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:21:02,015 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:21:09,992 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:21:10,318 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:22:10,332 - INFO - Retrieving pending reports
+2025-03-21 02:22:10,333 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:22:10,660 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:22:18,886 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:22:19,208 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:23:19,213 - INFO - Retrieving pending reports
+2025-03-21 02:23:19,213 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:23:19,539 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:23:27,674 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:23:27,997 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:24:28,011 - INFO - Retrieving pending reports
+2025-03-21 02:24:28,012 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:24:28,471 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:24:36,829 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:24:37,154 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:25:37,160 - INFO - Retrieving pending reports
+2025-03-21 02:25:37,161 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:25:37,495 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:25:45,667 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:25:45,990 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:26:45,993 - INFO - Retrieving pending reports
+2025-03-21 02:26:45,993 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:26:46,329 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:26:55,089 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:26:55,413 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:27:55,426 - INFO - Retrieving pending reports
+2025-03-21 02:27:55,426 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:27:55,753 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:28:04,075 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:28:04,398 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:29:04,407 - INFO - Retrieving pending reports
+2025-03-21 02:29:04,407 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:29:04,768 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:29:14,261 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:29:14,584 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:30:14,597 - INFO - Retrieving pending reports
+2025-03-21 02:30:14,597 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:30:14,926 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:30:23,249 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:30:23,570 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:31:23,573 - INFO - Retrieving pending reports
+2025-03-21 02:31:23,574 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:31:24,034 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:31:32,676 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:31:33,000 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:32:33,006 - INFO - Retrieving pending reports
+2025-03-21 02:32:33,006 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:32:33,336 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:32:41,956 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:32:42,277 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:33:42,279 - INFO - Retrieving pending reports
+2025-03-21 02:33:42,279 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:33:42,603 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:33:51,123 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:33:51,446 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:34:51,457 - INFO - Retrieving pending reports
+2025-03-21 02:34:51,457 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:34:51,911 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:35:00,405 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:35:00,727 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:36:00,728 - INFO - Retrieving pending reports
+2025-03-21 02:36:00,729 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:36:01,104 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:36:09,723 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:36:10,049 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:37:10,056 - INFO - Retrieving pending reports
+2025-03-21 02:37:10,056 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:37:10,386 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:37:19,018 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:37:19,342 - INFO - Waiting 1 minutes before next check...
+2025-03-21 02:38:19,342 - INFO - Retrieving pending reports
+2025-03-21 02:38:19,343 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 02:38:19,789 - INFO - Processing report ID 83 with site_id 1 and duration 24 hours
+2025-03-21 02:38:28,507 - ERROR - An error occurred while fetching pending reports: CreativeEnergyReport.generate_report() takes 6 positional arguments but 9 were given
+2025-03-21 02:38:28,831 - INFO - Waiting 1 minutes before next check...
+2025-03-21 04:55:45,605 - INFO - Retrieving pending reports
+2025-03-21 04:55:45,687 - INFO - 'reports' directory already exists at: reporting\reports
+2025-03-21 04:55:46,334 - ERROR - An error occurred while fetching pending reports: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))")
+[SQL: SELECT `Reports`.id AS `Reports_id`, `Reports`.report_title AS `Reports_report_title`, `Reports`.site_id AS `Reports_site_id`, `Reports`.report_type AS `Reports_report_type`, `Reports`.duration AS `Reports_duration`, `Reports`.path AS `Reports_path`, `Reports`.entered_on AS `Reports_entered_on`, `Reports`.`Status` AS `Reports_Status`, `Reports`.message AS `Reports_message`, `Reports`.created_at AS `Reports_created_at`, `Reports`.updated_at AS `Reports_updated_at` 
+FROM `Reports` 
+WHERE `Reports`.`Status` = false]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

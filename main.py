@@ -68,7 +68,7 @@ if __name__ == "__main__":
     try:
         while True:
             reporting.get_pending_reports()
-            logging.info("Waiting 5 minutes before next check...")
-            time.sleep(120)  # Wait for 2 minutes
+            logging.info("Waiting 1 minutes before next check...")
+            time.sleep(60)  # Wait for 2 minutes
     except KeyboardInterrupt:
         logging.info("Report generation stopped by user.")

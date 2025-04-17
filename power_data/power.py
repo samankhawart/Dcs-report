@@ -8,8 +8,9 @@ from sqlalchemy import func
 
 from Database.db_connector import DBConnection
 
-from Models.model import Device, Rack
+from Models.model import Device, Rack, Building,rack_building_association,DeviceInventory,Site
 from repo.site_repository import SiteRepository
+
 from repo.influxdb_repository import InfluxdbRepository  # Assuming InfluxdbRepository is defined elsewhere
 
 class PowerData:
@@ -190,11 +191,6 @@ class PowerData:
             }
         return data
 
-
-
-
-
-
     def calculate_energy_consumption_by_id_with_filter(self, site_id: int, duration_str: str) -> List[
         dict]:
 
@@ -266,4 +262,91 @@ class PowerData:
         #         processed_ips.add(ip)
 
         return top_devices_data_raw
+
+    def get_all_racks(self, site_id,duration):
+        with self.db_connection.session_scope()  as session:
+            start_date, end_date = self.calculate_start_end_dates(duration)
+            rack_list=[]
+            if site_id:
+                racks = session.query(Rack).filter(Rack.site_id == site_id).all()
+
+            else:
+                racks = session.query(Rack).all()
+            print("length",len(racks))
+
+            for rack in racks:
+
+                building = (
+                    session.query(Building.building_name)
+                    .join(rack_building_association, Building.id == rack_building_association.c.building_id)
+                    .filter(rack_building_association.c.rack_id == rack.id)
+                    .first()
+                )
+                rack.building_name = building[0] if building else None
+
+                apic_ips = session.query(Device.ip_address).filter(
+                    rack.id == DeviceInventory.rack_id, Device.id == DeviceInventory.apic_controller_id
+                ).distinct().all()
+
+                site_result = session.query(Site.site_name).filter(Site.id == rack.site_id).first()
+                rack.site_name = site_result[0] if site_result else None
+
+                num_devices = session.query(func.count(Device.id)).filter(Device.rack_id == rack.id).scalar()
+                rack.num_devices = num_devices
+                print("Num devices", rack.num_devices)
+
+                rack_power_data = self.influxdb_repository.get_24hrack_power(apic_ips, rack.id,start_date,
+                                                                          end_date, duration)
+                print(rack_power_data)
+
+                rack_traffic_data = self.influxdb_repository.get_24h_rack_datatraffic(apic_ips, rack.id,start_date,
+                                                                          end_date, duration)
+
+                if rack_power_data:
+                    power_utilization_values = [data.get('power_utilization', 0) for data in rack_power_data]
+                    total_power_utilization = sum(power_utilization_values)
+                    average_power_utilization = total_power_utilization / len(power_utilization_values)
+                    rack.power_utilization = round(average_power_utilization, 2)
+
+                    pue_values = [data.get('pue', 0) for data in rack_power_data]
+                    total_pue = sum(pue_values)
+                    average_pue = total_pue / len(pue_values)
+                    rack.pue = round(average_pue, 2)
+
+                    power_input_values = [data.get('power_input', 0) for data in rack_power_data]
+                    total_power_input = sum(power_input_values)
+                    rack.power_input = round(total_power_input / 1000, 2)
+
+                    power_output_values = [data.get('power_output', 0) for data in rack_power_data]
+                    total_power_output = sum(power_output_values)
+                    rack.power_output = round(total_power_output / 1000, 2)
+                else:
+                    rack.power_utilization = 0
+                    rack.pue = 0
+                    rack.power_input = 0
+                    rack.power_output = 0
+
+                if rack_traffic_data:
+                    traffic_throughput_values = [data.get('traffic_through', 0) for data in rack_traffic_data]
+                    total_traffic_throughput = sum(traffic_throughput_values)
+                    rack.datatraffic = round(total_traffic_throughput / (1024 ** 3), 2)
+                else:
+                    rack.datatraffic = 0
+
+                rack_list.append({
+
+                    "Rack Name": rack.rack_name,
+                    "Building": rack.building_name,
+                    "Site Name": rack.site_name,
+                    "Number of Devices": rack.num_devices,
+                    "EER": rack.power_utilization,
+                    "PUE": rack.pue,
+                    "Power Input (kW)": rack.power_input,
+                    "Power Output(kW)": rack.power_output,
+                    "Data Traffic (GB)": rack.datatraffic,
+                    "Co2":round((rack.power_input *0.471),4),
+                    "PCR":round((rack.power_input*1000)/rack.datatraffic,4) if rack.datatraffic > 0 else 0
+
+                })
+            return rack_list
 

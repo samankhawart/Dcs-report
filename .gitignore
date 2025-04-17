@@ -1,4 +1,9 @@
+# IDE
 .idea/
+
+# Python
 venv/
 .env
+
+# Generated files
 .reporting/

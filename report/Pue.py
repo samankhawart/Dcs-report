@@ -31,6 +31,7 @@ class CreativeEnergyReport:
         self.data = pd.DataFrame(powerdata)
         self.data['time'] = pd.to_datetime(self.data['time'])
         # Calculate Performance Score
+
         avg_eer = self.data['energy_efficiency'].mean()
         avg_pue = self.data['power_efficiency'].mean()
         performance_score = (avg_eer / avg_pue) * 100

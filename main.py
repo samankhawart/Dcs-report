@@ -28,12 +28,12 @@ class Reporting:
         with self.db_connection.session_scope() as session:
             logging.info("Retrieving pending reports")
             try:
-                reports_path = os.path.join(report_dir, "reports")
+                reports_path = os.path.join(report_dir)
                 if not os.path.exists(reports_path):
                     os.makedirs(reports_path)
-                    logging.info(f"'reports' directory created at: {reports_path}")
+                    logging.info(f"directory created at: {reports_path}")
                 else:
-                    logging.info(f"'reports' directory already exists at: {reports_path}")
+                    logging.info(f"directory already exists at: {reports_path}")
                 results = []
                 pending_reports = session.query(Reports).filter(Reports.Status == False).all()
                 if pending_reports:
@@ -50,10 +50,9 @@ class Reporting:
 
                         print(file_path)
                         logging.info(f"Processing report ID {report.id} with site_id {site_id} and duration {duration}")
-                        if report_type in ('Energy Consumption Report', 'PUE Report'):
+                        if report_type:
                             print(report_type)
                             report_result = self.generate_report.get_results(report,site_name, file_path)
-
 
                         if report_result:
                             report.path = file_name  # Save only the filename in the database

@@ -72,7 +72,7 @@ class Reports(Base):
 class Device(Base):
     __tablename__ = 'Devices'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True)
     ip_address = Column(String(255), unique=False, index=True)
     device_type = Column(String(200), nullable=True)
     device_name = Column(String(200), nullable=True)
@@ -85,8 +85,10 @@ class Device(Base):
     password_group_id = Column(Integer, ForeignKey('password_groups.id'), nullable=True)
     node_id = Column(Integer, nullable=True)
     messages = Column(String(1000), nullable=True)
-    created_at = Column(DateTime, default=func.current_timestamp())
-    updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
+    collection_status = Column(Boolean, nullable=True, default=True)
+    rack = relationship("Rack", back_populates="devices")
+    site = relationship("Site", back_populates="devices")
+    device_type_id = Column(Integer, ForeignKey('device_type.id'), nullable=True)  # Added device_type_id
     vendor_id = Column(Integer, ForeignKey('vendor.id'), nullable=True)
 
 
@@ -96,6 +98,7 @@ class Device(Base):
     rack = relationship("Rack", back_populates="devices")
     password_group = relationship("PasswordGroup")
     vendor = relationship("Vendor", back_populates="devices")
+    device_type_rel = relationship("DeviceType", back_populates="devices")  # Relationship with DeviceType
 
 
 
@@ -178,7 +181,16 @@ class Vendor(Base):
     id = Column(Integer, primary_key=True)
     vendor_name = Column(String(200), nullable=True)
     devices = relationship("Device", back_populates="vendor")
+    devices1 = relationship("DeviceType", back_populates="vendor")
 
+
+class DeviceType(Base):
+    __tablename__ = "device_type"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    device_type = Column(String(255), nullable=False)
+    vendor_id = Column(Integer, ForeignKey("vendor.id"), nullable=False)
+    vendor = relationship("Vendor", back_populates="devices1")
+    devices = relationship("Device", back_populates="device_type_rel")
 
 
 

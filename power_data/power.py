@@ -12,6 +12,8 @@ from Models.model import Device, Rack, Building,rack_building_association,Device
 from repo.site_repository import SiteRepository
 
 from repo.influxdb_repository import InfluxdbRepository  # Assuming InfluxdbRepository is defined elsewhere
+import logging
+logger = logging.getLogger(__name__)
 
 class PowerData:
     def __init__(self):
@@ -140,6 +142,42 @@ class PowerData:
             "consumption_percentages": consumption_percentages,
             "totalpin_kws": totalpin_kws
         }
+    def calculate_average_energy_consumption_by_site_id(self, site_id: int, duration_str: str) -> dict:
+        start_date, end_date = self.calculate_start_end_dates(duration_str)
+
+
+        print('datatata')
+        device_ips = self.get_ips(site_id)
+
+
+
+        if not device_ips:
+            logger.warning("Empty device_ips list provided")
+            return {"time": f"{start_date} - {end_date}"}
+
+        metrics = self.influxdb_repository.get_energy_consumption_metrics_with_filter17(device_ips, start_date, end_date, duration_str)
+
+        print(metrics)
+        if not metrics:
+            return {"time": f"{start_date} - {end_date}"}
+
+        total_energy_consumption = sum(metric.get('energy_consumption', 0) for metric in metrics)
+        total_POut_kw = sum(metric.get('total_POut_kw', 0) for metric in metrics)
+        total_PIn_kw = sum(metric.get('total_PIn_kw', 0) for metric in metrics)
+        total_power_efficiency = sum(metric.get('power_efficiency', 0) for metric in metrics)
+        count = len(metrics)
+
+        co2emmsion=self.get_unit(total_PIn_kw*0.4041)
+
+
+        return {
+            "time": f"{start_date} - {end_date}",
+            "energy_consumption":total_energy_consumption,
+            "total_POut_kw": round(total_POut_kw, 2) if count > 0 else None,
+            "total_PIn_kw": round(total_PIn_kw, 2) if count > 0 else None,
+            "power_efficiency": total_power_efficiency,
+            "co2emmsion":co2emmsion
+        }
 
     def calculate_carbon_emission(self, site_id: int, duration_str: str) -> (float, float, str, str):
 
@@ -205,24 +243,35 @@ class PowerData:
         print("ENERGY_METRIC_OF_KPIIIIIIIIIII", energy_metrics, file=sys.stderr)
         return energy_metrics
 
+
     def get_device_inventory(self, site_id):
         with self.db_connection.session_scope() as session:
             # Fetch all devices for the given site ID
-            devices = session.query(Device).filter(Device.site_id == site_id).all()
+            onboarded_devices = session.query(Device).filter(
+                (Device.site_id == site_id) &
+                (Device.OnBoardingStatus == True)
+            ).all()
+            devices = session.query(Device).filter(
+                (Device.site_id == site_id)
+            ).all()
 
             # Count distinct vendors for the given site ID
             total_vendors = (
                 session.query(func.count(Device.vendor_id.distinct()))
-                .filter(Device.site_id == site_id)
+                .filter(
+                    (Device.site_id == site_id) &
+                    (Device.OnBoardingStatus == True)
+                )
                 .scalar()
             )
+
             # Fetch all racks for the given site ID
             racks = session.query(Rack).filter(Rack.site_id == site_id).all()
 
             # Calculate onboarded devices
-            onboarded_devices = sum(1 for device in devices if device.OnBoardingStatus)
+            # onboarded_devices = sum(1 for device in devices if device.OnBoardingStatus)
             return {
-                "onboarded_devices": onboarded_devices,
+                "onboarded_devices": len(onboarded_devices),
                 "total_devices": len(devices),
                 "total_vendors": total_vendors,
                 "total_racks": len(racks)

@@ -15,6 +15,7 @@ class SiteRepository:
                 .options(joinedload(Device.site))  # Ensures related objects are loaded
                 .all()
             )
+            print(devices)
             return devices
 
     def get_device_inventory_by_site_id(self, site_id: int) -> List[Dict[str, any]]:

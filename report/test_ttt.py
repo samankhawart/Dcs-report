@@ -1,16 +1,20 @@
-
 import logging
 import numpy as np
 import pandas as pd
+import datetime
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from io import BytesIO
+import matplotlib
+
+matplotlib.use('Agg')  # Set the backend to Agg for non-interactive plotting
 
 
-class CreativeEnergyReport:
+class DynamicDCReportGenerator:
     def __init__(self):
         self.primary_color = '#003366'  # Dark blue
         self.secondary_color = '#1B98E0'  # Light blue
@@ -18,7 +22,6 @@ class CreativeEnergyReport:
         self.text_color = '#555555'  # Dark grey
         self.styles = getSampleStyleSheet()
         self.prepare_styles()
-
 
     def prepare_styles(self):
         # Unified blue color scheme styles
@@ -91,247 +94,240 @@ class CreativeEnergyReport:
             underline=1
         )
 
-    def generate_report(self, powerdata, summary_cards, site_name, duration, top_devices, bottom_devices, top_racks,
-                        filename):
-        self.data = pd.DataFrame(powerdata)
-        self.data['time'] = pd.to_datetime(self.data['time'])
+    def create_energy_trend_chart(self, energy_data):
+        """Create a line chart showing energy efficiency trends"""
+        df = pd.DataFrame(energy_data)
+        df['time'] = pd.to_datetime(df['time'])
 
-        # Generate charts and gauges
-        self.create_gauge(self.data['power_efficiency'].mean(), 4, 'Power Usage Effectiveness', 'PUE')
-        self.create_gauge(self.data['energy_efficiency'].mean(), 2, 'Energy Efficiency Ratio', 'EER')
-        self.generate_eer_graph()
-        self.generate_pue_graph()
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.plot(df['time'], df['power_efficiency'], label='PUE', color=self.primary_color, marker='o')
+        ax.plot(df['time'], df['energy_efficiency'], label='Energy Efficiency', color=self.secondary_color, marker='x')
+
+        # Formatting
+        ax.set_title('Energy Efficiency Trends', fontsize=14)
+        ax.set_xlabel('Time', fontsize=12)
+        ax.set_ylabel('Efficiency Ratio', fontsize=12)
+        ax.legend()
+        ax.grid(True, linestyle='--', alpha=0.7)
+
+        # Format x-axis dates
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:%M'))
+        fig.autofmt_xdate()
+
+        # Save to buffer
+        buf = BytesIO()
+        plt.savefig(buf, format='png', dpi=150, bbox_inches='tight')
+        plt.close()
+        buf.seek(0)
+        return buf
+
+    def create_power_consumption_chart(self, consumption_data):
+        """Create a bar chart showing power consumption breakdown"""
+        labels = ['IT Equipment', 'Facility Overhead']
+        values = [consumption_data['total_POut_kw'],
+                  consumption_data['total_PIn_kw'] - consumption_data['total_POut_kw']]
+
+        fig, ax = plt.subplots(figsize=(8, 5))
+        bars = ax.bar(labels, values, color=[self.primary_color, self.secondary_color])
+
+        # Add values on top of bars
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width() / 2., height,
+                    f'{height:.2f} kW',
+                    ha='center', va='bottom')
+
+        # Formatting
+        ax.set_title('Power Consumption Breakdown', fontsize=14)
+        ax.set_ylabel('Power (kW)', fontsize=12)
+        ax.grid(True, axis='y', linestyle='--', alpha=0.7)
+
+        # Save to buffer
+        buf = BytesIO()
+        plt.savefig(buf, format='png', dpi=150, bbox_inches='tight')
+        plt.close()
+        buf.seek(0)
+        return buf
+
+    def create_top_devices_table(self, devices, title):
+        """Create a table for top/bottom devices"""
+        device_data = [['Device Name', 'Power (kW)', 'CO2 Emissions']]
+        for device in devices[:5]:  # Show top 5
+            device_data.append([
+                device['device_name'],
+                device['total_power'],
+                device['co2emmissions']
+            ])
+
+        return Table(device_data, colWidths=[200, 100, 100])
+
+    def generate_report(self, input_data, output_file):
+        site_name = input_data['site_name']
+        duration = input_data['duration']
+        consumption_details = input_data['overall_consumption']
+        energy_data = input_data['energy_data']
+        top_devices = input_data['devices']['top']
+        bottom_devices = input_data['devices']['bottom']
+        inventory = input_data['inventory']
 
         # Create PDF Document
-        doc = SimpleDocTemplate(filename, pagesize=letter)
+        doc = SimpleDocTemplate(output_file, pagesize=letter)
         elements = []
 
         # Cover Page
-        elements.append(Paragraph(f"Energy Consumption Report for {site_name}", self.title_style))
-        elements.append(Paragraph(f"Reporting Period: {duration}", self.header_style))
-        elements.append(Spacer(1, 40))
+        elements.append(Paragraph("Data Center Energy Performance Report", self.title_style))
+        elements.append(Paragraph(f"Site: {site_name}", self.header_style))
+        elements.append(Paragraph(f"Reporting Period: {duration}", self.subheader_style))
+        elements.append(Spacer(1, 60))
 
-        # Key Findings Section (Detailed Executive Summary)
-        elements.append(Paragraph("<b>KEY FINDINGS: EXECUTIVE SUMMARY</b>", self.header_style))
+        # Key Findings Section
+        elements.append(Paragraph("<b>KEY FINDINGS</b>", self.header_style))
         elements.append(Spacer(1, 15))
 
-        # Calculate key metrics
-        avg_pue = self.data['power_efficiency'].mean()
-        avg_eer = self.data['energy_efficiency'].mean()
-        total_energy = float(summary_cards['total_energy_consumption'].split()[0])
-        co2_savings = float(summary_cards['co2_savings'].split()[0]) if 'co2_savings' in summary_cards else 0
+        # Calculate metrics
+        avg_pue = consumption_details['power_efficiency']
+        avg_eer = consumption_details['energy_consumption']
+        total_power = consumption_details['total_PIn_kw']
+        it_power = consumption_details['total_POut_kw']
+        energy_loss = total_power - it_power
+        loss_percent = (energy_loss / total_power) * 100
+        co2_emissions = consumption_details['co2emmsion'][1]
 
-        # Create detailed findings
-        findings = [
-            f"<b>1. Energy Efficiency Performance:</b> The site achieved an average Power Usage Effectiveness (PUE) of <font color='{self.secondary_color}'><b>{avg_pue:.2f}</b></font> " +
-            ("(excellent, meeting industry best practices)" if avg_pue <= 1.5 else
-             "(good, with room for improvement)" if avg_pue <= 2.0 else
-             "(needs significant improvement)"),
+        # Key findings summary
+        findings_content = f"""
+        <b>🔍 Key Observations:</b><br/>
+        - Average PUE: <b>{avg_pue:.2f}</b> (IT power is {it_power:.2f} kW, facility overhead is {energy_loss:.2f} kW)<br/>
+        - Energy Efficiency Ratio: <b>{avg_eer:.2f}</b><br/>
+        - CO2 Emissions: <b>{co2_emissions:.2f} kg</b> during reporting period<br/>
+        - Inventory: <b>{inventory['onboarded_devices']}/{inventory['total_devices']}</b> devices onboarded from <b>{inventory['total_vendors']}</b> vendors<br/><br/>
 
-            f"<b>2. Cooling Efficiency:</b> The Energy Efficiency Ratio (EER) averaged <font color='{self.secondary_color}'><b>{avg_eer:.2f}</b></font> " +
-            ("indicating highly efficient cooling systems" if avg_eer >= 1.5 else
-             "showing moderate cooling efficiency" if avg_eer >= 0.5 else
-             "suggesting cooling system inefficiencies"),
-
-            f"<b>3. Energy Consumption:</b> Total energy consumption was <font color='{self.secondary_color}'><b>{total_energy:,} kWh</b></font> during the reporting period",
-
-            f"<b>4. Top Performing Devices:</b> The highest efficiency devices achieved PCR (Power to Carbon Ratio) scores up to " +
-            f"<font color='{self.secondary_color}'><b>{max(float(d['pcr']) for d in top_devices['top_devices']):.1f}</b></font>",
-
-            f"<b>5. Environmental Impact:</b> Potential CO₂ savings of <font color='{self.secondary_color}'><b>{co2_savings:,} kg</b></font> could be achieved with optimization",
-
-            f"<b>6. Peak Usage:</b> Highest power demand occurred at {self.data.loc[self.data['power_input'].idxmax()]['time'].strftime('%Y-%m-%d %H:%M')} " +
-            f"reaching <font color='{self.secondary_color}'><b>{self.data['power_input'].max():.1f} kW</b></font>",
-
-            f"<b>7. Efficiency Trends:</b> Daily PUE variance was <font color='{self.secondary_color}'><b>{self.data['power_efficiency'].std():.2f}</b></font> " +
-            "indicating " + (
-                "stable operations" if self.data['power_efficiency'].std() < 0.2 else "significant fluctuations")
-        ]
-
-        for finding in findings:
-            elements.append(Paragraph(finding, self.desc_style))
-            elements.append(Spacer(1, 8))
-
+        <b>📊 Efficiency Analysis:</b><br/>
+        - Facility overhead accounts for <b>{loss_percent:.1f}%</b> of total power consumption<br/>
+        - The data center is operating with <b>{'good' if avg_pue < 1.5 else 'moderate'}</b> energy efficiency<br/><br/>
+        """
+        elements.append(Paragraph(findings_content, self.desc_style))
         elements.append(Spacer(1, 20))
 
-        # Recommendation Highlights
-        elements.append(Paragraph("<b>RECOMMENDATIONS</b>", self.subheader_style))
-        recommendations = [
-            "• Implement targeted efficiency improvements for devices with PCR below 1.0",
-            "• Consider load balancing during peak usage periods",
-            "• Schedule maintenance for cooling systems showing efficiency degradation",
-            "• Evaluate virtualization opportunities for underutilized devices"
-        ]
+        # Energy Trends Section
+        elements.append(Paragraph("<b>ENERGY TRENDS</b>", self.header_style))
+        elements.append(Spacer(1, 15))
 
-        for rec in recommendations:
-            elements.append(Paragraph(rec, self.highlight_style))
-            elements.append(Spacer(1, 5))
+        # Generate and add energy trend chart
+        trend_chart = self.create_energy_trend_chart(energy_data)
+        elements.append(Image(trend_chart, width=400, height=200))
+        elements.append(Spacer(1, 15))
 
-        elements.append(Spacer(1, 30))
+        # Chart explanation
+        chart_explanation = """
+        <b>Trend Analysis:</b><br/>
+        The chart above shows the variation in Power Usage Effectiveness (PUE) and Energy Efficiency Ratio over time.<br/>
+        - <b>PUE</b> (blue line) measures total facility power divided by IT equipment power (ideal = 1.0)<br/>
+        - <b>Energy Efficiency</b> (orange line) shows the ratio of useful cooling to energy consumed<br/><br/>
+        """
+        elements.append(Paragraph(chart_explanation, self.desc_style))
+        elements.append(Spacer(1, 20))
 
-        # Rest of the report continues with existing sections...
-        # [Previous content sections would follow here]
+        # Power Consumption Breakdown
+        elements.append(Paragraph("<b>POWER CONSUMPTION BREAKDOWN</b>", self.header_style))
+        elements.append(Spacer(1, 15))
 
-        # Build PDF
+        # Generate and add power consumption chart
+        power_chart = self.create_power_consumption_chart(consumption_details)
+        elements.append(Image(power_chart, width=350, height=200))
+        elements.append(Spacer(1, 15))
+
+        # Power consumption explanation
+        power_explanation = f"""
+        <b>Consumption Analysis:</b><br/>
+        - IT Equipment consumes <b>{it_power:.2f} kW</b> ({100 - loss_percent:.1f}% of total)<br/>
+        - Facility overhead (cooling, power distribution, etc.) consumes <b>{energy_loss:.2f} kW</b><br/>
+        - Total facility power draw is <b>{total_power:.2f} kW</b><br/><br/>
+        """
+        elements.append(Paragraph(power_explanation, self.desc_style))
+        elements.append(Spacer(1, 20))
+
+        # Top Power-Consuming Devices
+        elements.append(Paragraph("<b>TOP POWER-CONSUMING DEVICES</b>", self.header_style))
+        elements.append(Spacer(1, 15))
+
+        top_devices_table = self.create_top_devices_table(top_devices, "Top Power Consumers")
+        top_devices_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor(self.primary_color)),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 12),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#F5F9FF')),
+            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor(self.secondary_color)),
+        ]))
+        elements.append(top_devices_table)
+        elements.append(Spacer(1, 15))
+
+        devices_analysis = """
+        <b>Device Analysis:</b><br/>
+        The table above shows the devices with highest power consumption. These devices typically offer<br/>
+        the greatest opportunities for optimization through:<br/>
+        - Right-sizing or virtualization<br/>
+        - Firmware updates for power management features<br/>
+        - Potential replacement with more efficient models<br/><br/>
+        """
+        elements.append(Paragraph(devices_analysis, self.desc_style))
+        elements.append(Spacer(1, 20))
+
+        # Recommendations Section
+        elements.append(Paragraph("<b>RECOMMENDATIONS</b>", self.header_style))
+        elements.append(Spacer(1, 15))
+
+        recommendations = f"""
+        <b>1. Cooling System Optimization:</b><br/>
+        - Implement hot/cold aisle containment (potential 5-15% savings)<br/>
+        - Adjust cooling setpoints upward where possible (1°C ≈ 3% savings)<br/><br/>
+
+        <b>2. Power Management:</b><br/>
+        - Install smart PDUs for granular power monitoring<br/>
+        - Consider high-efficiency UPS systems (>97% efficiency)<br/><br/>
+
+        <b>3. IT Equipment:</b><br/>
+        - Conduct server virtualization assessment<br/>
+        - Implement power management policies on all devices<br/>
+        - Replace oldest {min(3, len(top_devices))} high-consumption devices in next refresh cycle<br/><br/>
+
+        <b>4. Monitoring & Benchmarking:</b><br/>
+        - Implement continuous PUE monitoring with alerts<br/>
+        - Benchmark against similar facilities quarterly<br/><br/>
+        """
+        elements.append(Paragraph(recommendations, self.desc_style))
+        elements.append(Spacer(1, 20))
+
+        # Final Assessment
+        elements.append(Paragraph("<b>FINAL ASSESSMENT</b>", self.header_style))
+        elements.append(Spacer(1, 15))
+
+        assessment = f"""
+        <b>Overall Assessment:</b><br/>
+        The {site_name} data center shows {'good' if avg_pue < 1.5 else 'moderate'} energy efficiency with a PUE of {avg_pue:.2f}.<br/>
+        Key opportunities exist in cooling optimization and power management that could reduce<br/>
+        energy overhead by an estimated 10-20%.<br/><br/>
+
+        <b>Next Steps:</b><br/>
+        1. Conduct detailed thermal assessment within next 30 days<br/>
+        2. Develop implementation plan for containment strategies<br/>
+        3. Schedule review of top {min(5, len(top_devices))} power-consuming devices<br/><br/>
+
+        <b>Estimated Potential Savings:</b><br/>
+        - Energy costs: ${(energy_loss * 0.15 * 24 * 365 * 0.12):.0f}/year (15% reduction at $0.12/kWh)<br/>
+        - CO2 emissions: {(co2_emissions * 0.15):.1f} kg/year reduction<br/><br/>
+        """
+        elements.append(Paragraph(assessment, self.highlight_style))
+        elements.append(Spacer(1, 20))
+
+        # Footer
+        elements.append(Paragraph(f"Report generated on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
+                                  self.footer_style))
+
+        # Build the PDF
         doc.build(elements)
-        print(f"Report generated successfully: {filename}")
 
-    # [Keep all other existing methods unchanged]
-    def add_summary_table(self, elements, summary_cards):
-        headers = [key.replace('_', ' ').title() for key in summary_cards.keys()]
-        values = [str(value) for value in summary_cards.values()]
 
-        data = [headers, values]
-        table = Table(data, colWidths=[120, 120, 120])
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#003366')),  # Dark blue header
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            ('BACKGROUND', (0, 1), (-1, 1), colors.HexColor('#D3D3D3')),  # Light grey for values
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('FONTSIZE', (0, 0), (-1, -1), 12),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
-            ('GRID', (0, 0), (-1, -1), 1, colors.white)
-        ]))
-        elements.append(table)
-        elements.append(Spacer(1, 20))
-
-    def add_top_devices_table(self, elements, top_devices):
-        top_devices = top_devices.get("top_devices", [])
-        headers = ["Device Name", "IP Address", "Total Power", "Traffic Speed", "PCR", "CO2 Emissions"]
-        data = [headers] + [[
-            device['device_name'],
-            device['ip_address'],
-            device['total_power'],
-            device['traffic_speed'],
-            device['pcr'],
-            device['co2emmissions'],
-        ] for device in top_devices]
-
-        table = Table(data, colWidths=[130, 70, 80, 80, 70, 80])
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#003366')),  # Dark blue header
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('FONTSIZE', (0, 0), (-1, -1), 10),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey)
-        ]))
-
-        # Alternate row colors
-        for i in range(1, len(data)):
-            bg_color = colors.HexColor('#D3D3D3') if i % 2 == 0 else colors.white  # Light grey and white
-            table.setStyle(TableStyle([
-                ('BACKGROUND', (0, i), (-1, i), bg_color)
-            ]))
-
-        elements.append(table)
-        elements.append(Spacer(1, 20))
-    def create_image_table(self, image_paths):
-        images = [Image(img, width=200, height=120) for img in image_paths]
-        return Table([images], colWidths=[200, 200])
-
-    def create_gauge(self, value, max_value, title, filename):
-        color = '#448c35' if value <= 1.5 else '#1678b5' if value <= 2.0 else '#f5113b'
-        fig, ax = plt.subplots(figsize=(4, 3), subplot_kw={'projection': 'polar'})
-        ax.set_theta_offset(np.pi)
-        ax.set_theta_direction(-1)
-        ax.set_axis_off()
-        angle = np.pi * (value / max_value)
-        ax.barh(1, angle, left=0, height=0.3, color=color)
-        ax.barh(1, np.pi - angle, left=angle, height=0.3, color='lightgrey')
-        ax.text(0, 0, f'{value:.2f}', ha='center', va='center', fontsize=18, fontweight='bold')
-        plt.title(title, fontsize=12, color='grey', pad=15)
-        plt.savefig(f"{filename}.png")
-        plt.close()
-
-    def generate_eer_graph(self):
-        self.generate_line_chart(self.data['time'], self.data['energy_efficiency'], 'EER', 'Energy Efficiency Over Time', 'eer_chart.png', 'tab:blue')
-
-    def generate_pue_graph(self):
-        self.generate_line_chart(self.data['time'], self.data['power_efficiency'], 'PUE', 'Power Usage Effectiveness Over Time', 'pue_chart.png', 'tab:green')
-
-    def generate_line_chart(self, time_series, values, ylabel, title, filename, color):
-        fig, ax = plt.subplots(figsize=(8, 4))
-        ax.set_xlabel("Time")
-        ax.set_ylabel(f"{ylabel} Ratio", color=color)
-        ax.plot(time_series, values, marker='o', color=color)
-        ax.tick_params(axis='y', labelcolor=color)
-        ax.set_ylim(0, 2)
-        ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-        ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-        fig.autofmt_xdate()
-
-        plt.title(title)
-        plt.tight_layout()
-        plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
-        plt.savefig(filename, dpi=300)
-        plt.close()
-
-    def add_top_devices_table(self, elements, top_devices):
-        # 'data' should be your original JSON
-        headers = ["Device Name","IP Address", "Total Power", "Traffic Speed", "PCR",
-                   "CO2 Emissions"]
-        print(headers)
-        data = [headers] + [[
-            device['device_name'],
-            device['ip_address'],
-            device['total_power'],
-            device['traffic_speed'],
-            device['pcr'],
-            device['co2emmissions'],
-        ] for device in top_devices]
-        print("also good till here")
-
-        table = Table(data, colWidths=[130, 70, 80, 80, 70, 80])
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#448c35')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('FONTSIZE', (0, 0), (-1, -1), 10),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey)
-        ]))
-
-        # Alternate row colors
-        for i in range(1, len(data)):
-            bg_color = colors.HexColor('#9cc993') if i % 2 == 0 else colors.white
-            table.setStyle(TableStyle([
-                ('BACKGROUND', (0, i), (-1, i), bg_color)
-            ]))
-
-        elements.append(table)
-        elements.append(Spacer(1, 20))
-
-    def add_rack_table(self, elements, racks):
-        headers = ["Rack Name", "Building", "Site Name", "Number of Devices", "EER", "PUE",
-                   "Power Input (kW)", "Data Traffic (GB)","PCR"]
-        data = [headers] + [[
-            rack["Rack Name"],
-            rack["Building"],
-            rack["Site Name"],
-            rack["Number of Devices"],
-            rack["EER"],
-            rack["PUE"],
-            rack["Power Input (kW)"],
-            rack["Data Traffic (GB)"],
-            rack["PCR"]
-
-        ] for rack in racks]
-        # col_widths = []  # Adjusted column widths
-        table = Table(data, colWidths=[80, 60, 70, 50, 50, 50, 70, 70, 50])
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#448c35')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('FONTSIZE', (0, 0), (-1, -1), 10),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey)
-        ]))
-
-        for i in range(1, len(data)):
-            bg_color = colors.HexColor('#9cc993') if i % 2 == 0 else colors.white
-            table.setStyle(TableStyle([('BACKGROUND', (0, i), (-1, i), bg_color)]))
-
-        elements.append(table)
-        elements.append(Spacer(1, 20))
-
+# Example usage:

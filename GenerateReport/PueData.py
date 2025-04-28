@@ -136,7 +136,7 @@ class PueData:
 
             # Generate the report
             self.powerreport.generate_report(input_data=input_data, output_file=filename)
-
+            return True
         except Exception as e:
             logging.error(f"Report generation failed for {site_name}: {str(e)}")
             raise RuntimeError(f"Could not generate report: {str(e)}")

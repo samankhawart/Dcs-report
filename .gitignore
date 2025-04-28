@@ -155,4 +155,6 @@ dmypy.json
 /uploaded_files/
 # Uploads directory
 /reporting/
-.env
+
+
+

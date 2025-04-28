@@ -57,7 +57,7 @@ class Reporting:
 
                         if report_result:
                             report.path = file_name  # Save only the filename in the database
-                            report.Status = False  # Mark the report as processed
+                            report.Status = True  # Mark the report as processed
                             report.message="Report Generated Successfully"
                             session.commit()  # Commit changes to the database
                             logging.info(f"Report ID {report_id} saved successfully at '{file_name}'")
